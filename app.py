@@ -179,3 +179,23 @@ def processar_pedidos_pendentes():
         else:
             print("Ação inválida. Pule para o próximo pedido.")
             i += 1
+# Parte 5: Atualizar Status e Consultar Pedidos
+fila_pedidos_prontos = []
+fila_pedidos_entregues = []
+
+def print_pedido(pedido):
+    print(f"\nCódigo: {pedido[0]}")
+    print(f"Status: {pedido[3]}")
+    print(f"Total: R${pedido[2]:.2f}")
+    print("Itens:")
+    for item in pedido[1]:
+        print(f"- {item[1]} (R${item[3]}, Estoque: {item[4]})")
+
+def atualizar_status_pedido():
+    if not fila_pedidos_aceitos and not fila_pedidos_prontos:
+        print("Não há pedidos em andamento.")
+        return
+    
+    todos_pedidos = fila_pedidos_aceitos + fila_pedidos_prontos
+    for pedido in todos_pedidos:
+        print(f"Código: {pedido[0]}, Status: {pedido[3]}, Total: R${pedido[2]:.2f}")
