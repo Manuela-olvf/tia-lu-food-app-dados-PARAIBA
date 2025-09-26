@@ -106,3 +106,62 @@ def atualizar_item():
     
     if not encontrado:
         print("Item não encontrado.")
+
+# Parte 3: Criar Pedidos e Fila de Pedidos Pendentes
+fila_pedidos_pendentes = []
+codigo_proximo_pedido = 1
+
+def criar_pedido():
+    global codigo_proximo_pedido
+    if not itens:
+        print("Não há itens no cardápio para criar pedido.")
+        return
+    
+    pedido_itens = []
+    while True:
+        print("\nItens disponíveis:")
+        for i in itens:
+            print(f"Código: {i[0]}, Nome: {i[1]}, Preço: R${i[3]}, Estoque: {i[4]}")
+        
+        try:
+            codigo_item = int(input("Digite o código do item que deseja adicionar: "))
+        except ValueError:
+            print("Código inválido.")
+            continue
+        
+        encontrado = False
+        for item in itens:
+            if item[0] == codigo_item:
+                encontrado = True
+                if item[4] == 0:
+                    print("Item sem estoque.")
+                    break
+                pedido_itens.append(item)
+                print(f"Item '{item[1]}' adicionado ao pedido.")
+                break
+        
+        if not encontrado:
+            print("Item não encontrado.")
+        
+        mais = input("Deseja adicionar outro item? (s/n): ").lower()
+        if mais != 's':
+            break
+    
+    if not pedido_itens:
+        print("Nenhum item selecionado. Pedido cancelado.")
+        return
+    
+    total = sum(item[3] for item in pedido_itens)
+    cupom = input("Deseja aplicar cupom de desconto (%)? Caso não, pressione enter: ")
+    if cupom:
+        try:
+            desconto = float(cupom)
+            total = total * (1 - desconto / 100)
+        except ValueError:
+            print("Cupom inválido. Nenhum desconto aplicado.")
+    
+    pedido = (codigo_proximo_pedido, pedido_itens, total, "AGUARDANDO APROVACAO")
+    fila_pedidos_pendentes.append(pedido)
+    print(f"\nPedido {codigo_proximo_pedido} criado com sucesso! Total: R${total:.2f}")
+    codigo_proximo_pedido += 1
+    
