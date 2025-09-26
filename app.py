@@ -35,18 +35,7 @@ def consultar_itens():
     for i in itens:
         print(f"Código: {i[0]}, Nome: {i[1]}, Descrição: {i[2]}, Preço: R${i[3]}, Estoque: {i[4]}")
 
-# Teste rápido
-while True:
-    print("\n1 - Cadastrar item\n2 - Consultar itens\n0 - Sair")
-    escolha = input("Escolha: ")
-    if escolha == "1":
-        cadastrar_item()
-    elif escolha == "2":
-        consultar_itens()
-    elif escolha == "0":
-        break
-    else:
-        print("Opção inválida.")
+
 # Parte 2: Atualizar Itens
 def atualizar_item():
     if not itens:
@@ -165,3 +154,28 @@ def criar_pedido():
     print(f"\nPedido {codigo_proximo_pedido} criado com sucesso! Total: R${total:.2f}")
     codigo_proximo_pedido += 1
     
+# Parte 4: Processar Pedidos Pendentes
+fila_pedidos_aceitos = []
+
+def processar_pedidos_pendentes():
+    if not fila_pedidos_pendentes:
+        print("Não há pedidos pendentes.")
+        return
+    i = 0
+    while i < len(fila_pedidos_pendentes):
+        pedido = fila_pedidos_pendentes[i]
+        codigo = pedido[0]
+        total = pedido[2]
+        print(f"\nPedido {codigo} - Total: R${total:.2f} - Status: {pedido[3]}")
+        acao = input("Aceitar ou Rejeitar o pedido? (a/r): ").lower()
+        if acao == 'a':
+            novo_pedido = (pedido[0], pedido[1], pedido[2], "ACEITO")
+            fila_pedidos_aceitos.append(novo_pedido)
+            fila_pedidos_pendentes.pop(i)
+            print(f"Pedido {codigo} ACEITO.")
+        elif acao == 'r':
+            fila_pedidos_pendentes.pop(i)
+            print(f"Pedido {codigo} REJEITADO.")
+        else:
+            print("Ação inválida. Pule para o próximo pedido.")
+            i += 1
