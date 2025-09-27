@@ -35,8 +35,21 @@ def consultar_itens():
     for i in itens:
         print(f"Código: {i[0]}, Nome: {i[1]}, Descrição: {i[2]}, Preço: R${i[3]}, Estoque: {i[4]}")
 
+    # Teste rápido
+while True:
+    print("\n1 - Cadastrar item\n2 - Consultar itens\n0 - Sair")
+    escolha = input("Escolha: ")
+    if escolha == "1":
+        cadastrar_item()
+    elif escolha == "2":
+        consultar_itens()
+    elif escolha == "0":
+        break
+    else:
+        print("Opção inválida.")
 
-# Parte 2: Atualizar Itens
+
+    # Parte 2: Atualizar Itens
 def atualizar_item():
     if not itens:
         print("Não há itens cadastrados.")
@@ -96,7 +109,22 @@ def atualizar_item():
     if not encontrado:
         print("Item não encontrado.")
 
-# Parte 3: Criar Pedidos e Fila de Pedidos Pendentes
+    # Teste rápido
+while True:
+    print("\n1 - Atualizar item\n2 - Consultar itens\n0 - Sair")
+    escolha = input("Escolha: ")
+    if escolha == "1":
+        atualizar_item()
+    elif escolha == "2":
+        for i in itens:
+            print(f"Código: {i[0]}, Nome: {i[1]}, Preço: {i[3]}, Estoque: {i[4]}")
+    elif escolha == "0":
+        break
+    else:
+        print("Opção inválida.")
+
+
+    # Parte 3: Criar Pedidos e Fila de Pedidos Pendentes
 fila_pedidos_pendentes = []
 codigo_proximo_pedido = 1
 
@@ -154,6 +182,21 @@ def criar_pedido():
     print(f"\nPedido {codigo_proximo_pedido} criado com sucesso! Total: R${total:.2f}")
     codigo_proximo_pedido += 1
     
+    # Teste rápido
+while True:
+    print("\n1 - Criar pedido\n2 - Ver pedidos pendentes\n0 - Sair")
+    escolha = input("Escolha: ")
+    if escolha == "1":
+        criar_pedido()
+    elif escolha == "2":
+        for p in fila_pedidos_pendentes:
+            print(f"Código: {p[0]}, Total: R${p[2]:.2f}, Status: {p[3]}")
+    elif escolha == "0":
+        break
+    else:
+        print("Opção inválida.")
+
+
 # Parte 4: Processar Pedidos Pendentes
 fila_pedidos_aceitos = []
 
@@ -179,6 +222,21 @@ def processar_pedidos_pendentes():
         else:
             print("Ação inválida. Pule para o próximo pedido.")
             i += 1
+
+            # Teste rápido
+while True:
+    print("\n1 - Processar pedidos pendentes\n2 - Ver pedidos aceitos\n0 - Sair")
+    escolha = input("Escolha: ")
+    if escolha == "1":
+        processar_pedidos_pendentes()
+    elif escolha == "2":
+        for p in fila_pedidos_aceitos:
+            print(f"Código: {p[0]}, Total: R${p[2]:.2f}, Status: {p[3]}")
+    elif escolha == "0":
+        break
+    else:
+        print("Opção inválida.")
+
 # Parte 5: Atualizar Status e Consultar Pedidos
 fila_pedidos_prontos = []
 fila_pedidos_entregues = []
