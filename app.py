@@ -57,7 +57,7 @@ def atualizar_item():
     
     print("\nItens disponíveis:")
     for i in itens:
-        print(f"Código: {i[0]}, Nome: {i[1]}, Preço: R${i[3]}, Estoque: {i[4]}")
+        print(f"Código: {i[0]}, Nome: {i[1]}, Descrição: {i[2]}, Preço: R${i[3]}, Estoque: {i[4]}")
     
     try:
         codigo = int(input("Digite o código do item que deseja atualizar: "))
@@ -117,7 +117,7 @@ while True:
         atualizar_item()
     elif escolha == "2":
         for i in itens:
-            print(f"Código: {i[0]}, Nome: {i[1]}, Preço: {i[3]}, Estoque: {i[4]}")
+            print(f"Código: {i[0]}, Nome: {i[1]}, Descrição: {i[2]}, Preço: R${i[3]}, Estoque: {i[4]}")
     elif escolha == "0":
         break
     else:
@@ -138,7 +138,7 @@ def criar_pedido():
     while True:
         print("\nItens disponíveis:")
         for i in itens:
-            print(f"Código: {i[0]}, Nome: {i[1]}, Preço: R${i[3]}, Estoque: {i[4]}")
+            print(f"Código: {i[0]}, Nome: {i[1]}, Descrição: {i[2]}, Preço: R${i[3]}, Estoque: {i[4]}")
         
         try:
             codigo_item = int(input("Digite o código do item que deseja adicionar: "))
